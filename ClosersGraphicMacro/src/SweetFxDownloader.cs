@@ -13,6 +13,8 @@ namespace ClosersGraphicMacro.src
         private const string DOWNLOAD_PATH = "test/sweetFx.7z";
         private readonly string targetProgramPath;
         private readonly Action<string> logFunc;
+        public readonly bool enabled;
+
         public SweetFxDownloader(string targetPathRegistry, Action<string> logFunc)
         {
             this.logFunc = logFunc;
@@ -24,12 +26,14 @@ namespace ClosersGraphicMacro.src
             });
 
             var path = reg.GetValue(pathList.Last());
-            if (path != null && path.ToString().Length > 0)
+            enabled = path != null && path.ToString().Length > 0;
+            if (enabled)
             {
                 targetProgramPath = path.ToString();
                 log($"경로 획득 성공 : {targetProgramPath}");
             }
             else log($"경로 획득 실패");
+            reg.Dispose();
         }
 
         public async void downloadStart()

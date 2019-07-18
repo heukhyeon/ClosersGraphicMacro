@@ -32,11 +32,14 @@ namespace ClosersGraphicMacro
         private void startButtonClick(object sender, RoutedEventArgs e)
         {
             log("클릭!");
-            var api = new NvApiConnect("Feng Yin Zhe / Closers", this.log);
-            //api.antiAliasGet();
-            api.antiAliasSet();
-            api.Dispose();
-            new SweetFxDownloader("SOFTWARE/WOW6432Node/Nexon/Closers/RootPath", this.log);
+            using (var api = new NvApiConnect("Feng Yin Zhe / Closers", this.log))
+            {
+                if (api.enabled) api.antiAliasSet();
+                else return;
+            };
+            var downloader = new SweetFxDownloader("SOFTWARE/WOW6432Node/Nexon/Closers/RootPath", this.log);
+            if (downloader.enabled) downloader.downloadStart();
+            else return;
         }
 
         private void log(String text)

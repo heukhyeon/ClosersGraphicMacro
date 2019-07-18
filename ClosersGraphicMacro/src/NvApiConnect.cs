@@ -14,6 +14,7 @@ namespace ClosersGraphicMacro.src
         private readonly Action<string> logFunc;
         private readonly DriverSettingsProfile profile;
         private readonly DriverSettingsSession session = DriverSettingsSession.CreateAndLoad();
+        public readonly bool enabled;
         private const uint ID_ANTIALIAS_MODE = 276757595;
         private const uint ID_ANTIALIAS_SETTING = 282555346;
         private const uint ID_ATOMIC_FILTERING = 270426537;
@@ -30,18 +31,28 @@ namespace ClosersGraphicMacro.src
         {
             this.name = name;
             this.logFunc = logFunc;
-            this.profile = session.FindProfileByName(name);
-            log($"프로세스 감지 완료 : {name}");
-            var gpuList = NvAPIWrapper.GPU.PhysicalGPU.GetPhysicalGPUs();
-            if (gpuList.Length == 0)
+            try
             {
-                log("Nvidia 그래픽카드가 감지되지 않습니다");
-
+                this.profile = session.FindProfileByName(name);
+                log($"프로세스 감지 완료 : {name}");
+                var gpuList = NvAPIWrapper.GPU.PhysicalGPU.GetPhysicalGPUs();
+                enabled = gpuList.Length > 0;
+                if (gpuList.Length == 0)
+                {
+                    log("Nvidia 그래픽카드가 감지되지 않습니다");
+                }
+                else gpuList.ToList().ForEach(gpu =>
+                {
+                    log($"Nvidia 그래픽카드 감지 : {gpu.FullName}");
+                });
             }
-            else gpuList.ToList().ForEach(gpu =>
+            catch(Exception e)
             {
-                log($"Nvidia 그래픽카드 감지 : {gpu.FullName}");
-            });
+                log("Nvidia 그래픽카드 설정 초기화중 에러 발생");
+                log(e.StackTrace);
+                enabled = false;
+            }
+           
         }
 
         public void antiAliasGet()

@@ -36,13 +36,15 @@ namespace ClosersGraphicMacro
             //api.antiAliasGet();
             api.antiAliasSet();
             api.Dispose();
-
+            new SweetFxDownloader("SOFTWARE/WOW6432Node/Nexon/Closers/RootPath", this.log);
         }
 
         private void log(String text)
         {
-            logText += $"{text}\n";
-            text_log.Text = logText;
+            text_log.Dispatcher.Invoke(()=>{
+                logText += $"{text}\n";
+                text_log.Text = logText;
+            });
         }
     }
 }

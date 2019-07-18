@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClosersGraphicMacro.src;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,17 +25,24 @@ namespace ClosersGraphicMacro
         public MainWindow()
         {
             InitializeComponent();
+            NvAPIWrapper.NVIDIA.Initialize();
+            log("");
         }
 
         private void startButtonClick(object sender, RoutedEventArgs e)
         {
             log("클릭!");
+            var api = new NvApiConnect("Feng Yin Zhe / Closers", this.log);
+            //api.antiAliasGet();
+            api.antiAliasSet();
+            api.Dispose();
+
         }
 
         private void log(String text)
         {
             logText += $"{text}\n";
-            text_log.Content = logText;
+            text_log.Text = logText;
         }
     }
 }

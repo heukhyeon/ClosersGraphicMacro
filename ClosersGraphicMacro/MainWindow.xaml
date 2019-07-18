@@ -9,7 +9,15 @@
     <Grid>
         <Button Content="Button" HorizontalAlignment="Left" Margin="572,10,0,0" VerticalAlignment="Top" Width="199" Height="41" Click="startButtonClick" />
         <ProgressBar HorizontalAlignment="Left" Height="41" Margin="10,10,0,0" VerticalAlignment="Top" Width="557"/>
-        <Label x:Name="text_log" Content="Label" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Height="345" Width="772" BorderThickness="1" ClipToBounds="True" SnapsToDevicePixels="True" BorderBrush="Black"/>
+        <TextBox x:Name="text_log" Text="Label" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Height="345" Width="772" BorderThickness="1" ClipToBounds="True" SnapsToDevicePixels="True" BorderBrush="Black">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="IsReadOnly" Value="True" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                </Style>
+            </TextBox.Style>
+        </TextBox>
 
     </Grid>
 </Window>

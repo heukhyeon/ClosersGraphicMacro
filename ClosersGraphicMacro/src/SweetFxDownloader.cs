@@ -11,7 +11,8 @@ namespace ClosersGraphicMacro.src
     class SweetFxDownloader
     {
         private const string URL = "http://sfx.thelazy.net/static/media/downloads/SweetFX_1_5-23364.7z";
-        private const string DOWNLOAD_PATH = "test/sweetFx.7z";
+        private const string DOWNLOAD_DIR = "temp";
+        private string DOWNLOAD_PATH = $"{DOWNLOAD_DIR}/sweetFx.7z";
         private readonly string targetProgramPath;
         private readonly Action<string> logFunc;
         private string targetSweetFxPath
@@ -49,11 +50,17 @@ namespace ClosersGraphicMacro.src
         {
             log("SweetFx 파일을 다운로드중입니다...");
             var client = new WebClient();
+            if (!Directory.Exists(DOWNLOAD_DIR))
+            {
+                Directory.CreateDirectory(DOWNLOAD_DIR);
+            }
+
             await client.DownloadFileTaskAsync(new Uri(URL), DOWNLOAD_PATH);
             log("SweetFx 파일을 다운로드했습니다");
             log("SweetFx 압축을 해제중입니다...");
             new SevenZipNET.SevenZipExtractor(DOWNLOAD_PATH).ExtractAll(targetProgramPath, true);
             log("SweetFx 압축을 해제했습니다.");
+            Directory.Delete(DOWNLOAD_DIR, true);
             client.Dispose();
         }
 

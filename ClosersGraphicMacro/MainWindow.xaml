@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClosersGraphicMacro"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ClosersGraphicMacro" Height="450" Width="800">
     <Grid>
         <Button Content="Start!" HorizontalAlignment="Left" Margin="572,10,0,0" VerticalAlignment="Top" Width="199" Height="41" Click="startProcess" />
         <TextBox x:Name="text_log" Text="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="399" Width="557" BorderThickness="1" ClipToBounds="True" SnapsToDevicePixels="True" BorderBrush="Black">

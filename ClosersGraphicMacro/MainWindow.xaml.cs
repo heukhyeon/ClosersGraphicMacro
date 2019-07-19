@@ -46,7 +46,8 @@ namespace ClosersGraphicMacro
 
         private void log(String text)
         {
-            text_log.Dispatcher.Invoke(()=>{
+            text_log.Dispatcher.Invoke(() =>
+            {
                 logText += $"{text}\n";
                 text_log.Text = logText;
             });
@@ -54,6 +55,9 @@ namespace ClosersGraphicMacro
 
         private void showLicense(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show("SweetFx 기본 설정 원본 : https://gall.dcinside.com/board/view?id=closers&no=2835729", "SweetFx Setting", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            System.Diagnostics.Process.Start("https://github.com/heukhyeon/ClosersGraphicMacro/blob/master/LICENSE.txt");
 
         }
     }

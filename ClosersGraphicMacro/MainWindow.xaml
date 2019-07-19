@@ -7,9 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="572,10,0,0" VerticalAlignment="Top" Width="199" Height="41" Click="startButtonClick" />
-        <ProgressBar HorizontalAlignment="Left" Height="41" Margin="10,10,0,0" VerticalAlignment="Top" Width="557"/>
-        <TextBox x:Name="text_log" Text="Label" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Height="345" Width="772" BorderThickness="1" ClipToBounds="True" SnapsToDevicePixels="True" BorderBrush="Black">
+        <Button Content="Start!" HorizontalAlignment="Left" Margin="572,10,0,0" VerticalAlignment="Top" Width="199" Height="41" Click="startProcess" />
+        <TextBox x:Name="text_log" Text="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="399" Width="557" BorderThickness="1" ClipToBounds="True" SnapsToDevicePixels="True" BorderBrush="Black">
             <TextBox.Style>
                 <Style TargetType="TextBox">
                     <Setter Property="IsReadOnly" Value="True" />
@@ -18,6 +17,7 @@
                 </Style>
             </TextBox.Style>
         </TextBox>
+        <Button Content="License" HorizontalAlignment="Left" Margin="572,56,0,0" VerticalAlignment="Top" Width="199" Height="98" Click="showLicense"/>
 
     </Grid>
 </Window>

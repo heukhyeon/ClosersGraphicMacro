@@ -29,7 +29,7 @@ namespace ClosersGraphicMacro
             log("");
         }
 
-        private async void startButtonClick(object sender, RoutedEventArgs e)
+        private async void startProcess(object sender, RoutedEventArgs e)
         {
             log("클릭!");
             using (var api = new NvApiConnect("Feng Yin Zhe / Closers", this.log))
@@ -50,6 +50,11 @@ namespace ClosersGraphicMacro
                 logText += $"{text}\n";
                 text_log.Text = logText;
             });
+        }
+
+        private void showLicense(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

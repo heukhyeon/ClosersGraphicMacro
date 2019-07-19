@@ -29,7 +29,7 @@ namespace ClosersGraphicMacro
             log("");
         }
 
-        private void startButtonClick(object sender, RoutedEventArgs e)
+        private async void startButtonClick(object sender, RoutedEventArgs e)
         {
             log("클릭!");
             using (var api = new NvApiConnect("Feng Yin Zhe / Closers", this.log))
@@ -38,8 +38,10 @@ namespace ClosersGraphicMacro
                 else return;
             };
             var downloader = new SweetFxDownloader("SOFTWARE/WOW6432Node/Nexon/Closers/RootPath", this.log);
-            if (downloader.enabled) downloader.downloadStart();
+            if (downloader.enabled) await downloader.downloadStart();
             else return;
+            downloader.setSweetFxSetting("SweetFX_settings.txt");
+
         }
 
         private void log(String text)

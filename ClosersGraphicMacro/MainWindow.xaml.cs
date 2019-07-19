@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -41,7 +42,7 @@ namespace ClosersGraphicMacro
             if (downloader.enabled) await downloader.downloadStart();
             else return;
             downloader.setSweetFxSetting("SweetFX_settings.txt");
-
+            showHomePage();
         }
 
         private void log(String text)
@@ -59,6 +60,14 @@ namespace ClosersGraphicMacro
 
             System.Diagnostics.Process.Start("https://github.com/heukhyeon/ClosersGraphicMacro/blob/master/LICENSE.txt");
 
+        }
+
+        private async void showHomePage()
+        {
+            log("작업이 완료되어 게임 홈페이지를 실행합니다. 잠시후 창이 닫힙니다.");
+            await Task.Delay(1000);
+            System.Diagnostics.Process.Start("http://closers.nexon.com/main/index.aspx");
+            Dispatcher.Invoke(Close);
         }
     }
 }

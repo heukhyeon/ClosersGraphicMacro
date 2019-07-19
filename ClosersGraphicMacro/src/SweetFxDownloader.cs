@@ -21,7 +21,7 @@ namespace ClosersGraphicMacro.src
             {
                 return $"{targetProgramPath}/SweetFX_settings.txt";
             }
-            
+
         }
         public readonly bool enabled;
 
@@ -77,9 +77,18 @@ namespace ClosersGraphicMacro.src
             file.Dispose();
             File.WriteAllText(targetSweetFxPath, setting);
             log("SweetFx 설정을 갱신했습니다");
+
+            if (Environment.Is64BitProcess)
+                fix64BitLaunch();
         }
 
-       
+        private void fix64BitLaunch()
+        {
+            log("64비트 클라이언트 충돌 문제를 수정중입니다...");
+            File.Copy("d3d9_x64.dll", $"{targetProgramPath}/d3d9.dll",true);
+            File.Copy("dxgi_x64.dll", $"{targetProgramPath}/dxgi.dll",true);
+            log("64비트 클라이언트 충돌 문제를 수정했습니다");
+        }
         private void log(string text)
         {
             logFunc.Invoke(text);

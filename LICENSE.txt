@@ -15,6 +15,11 @@ The MIT License (MIT)
 Copyright (c) .NET Foundation and Contributors
 https://github.com/dotnet/wpf/blob/master/LICENSE.TXT
 
+//Reshade
+BSD 3-Clause "New" or "Revised" License
+
+Copyright 2014 Patrick Mours. All rights reserved.
+https://github.com/crosire/reshade/blob/master/LICENSE.md
 
 //NvApiWrapper
 GNU LESSER GENERAL PUBLIC LICENSE

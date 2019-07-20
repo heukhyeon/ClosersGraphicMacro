@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -48,20 +49,11 @@ namespace ClosersGraphicMacro.src
 
         public async Task downloadStart()
         {
-            log("SweetFx 파일을 다운로드중입니다...");
-            var client = new WebClient();
-            if (!Directory.Exists(DOWNLOAD_DIR))
-            {
-                Directory.CreateDirectory(DOWNLOAD_DIR);
-            }
-
-            await client.DownloadFileTaskAsync(new Uri(URL), DOWNLOAD_PATH);
-            log("SweetFx 파일을 다운로드했습니다");
-            log("SweetFx 압축을 해제중입니다...");
-            new SevenZipNET.SevenZipExtractor(DOWNLOAD_PATH).ExtractAll(targetProgramPath, true);
-            log("SweetFx 압축을 해제했습니다.");
+            log("Reshade 설정을 추가중입니다...");
+            new SevenZipNET.SevenZipExtractor("reshade.zip").ExtractAll(DOWNLOAD_DIR, true);
+            FileSystem.CopyDirectory(DOWNLOAD_DIR, targetProgramPath, UIOption.OnlyErrorDialogs);
             Directory.Delete(DOWNLOAD_DIR, true);
-            client.Dispose();
+            log("Reshade 설정을 추가했습니다");
         }
 
         public void setSweetFxSetting(string predefinedFilePath)
@@ -77,18 +69,9 @@ namespace ClosersGraphicMacro.src
             file.Dispose();
             File.WriteAllText(targetSweetFxPath, setting);
             log("SweetFx 설정을 갱신했습니다");
-
-            if (Environment.Is64BitProcess)
-                fix64BitLaunch();
         }
 
-        private void fix64BitLaunch()
-        {
-            log("64비트 클라이언트 충돌 문제를 수정중입니다...");
-            File.Copy("d3d9_x64.dll", $"{targetProgramPath}/d3d9.dll",true);
-            File.Copy("dxgi_x64.dll", $"{targetProgramPath}/dxgi.dll",true);
-            log("64비트 클라이언트 충돌 문제를 수정했습니다");
-        }
+       
         private void log(string text)
         {
             logFunc.Invoke(text);

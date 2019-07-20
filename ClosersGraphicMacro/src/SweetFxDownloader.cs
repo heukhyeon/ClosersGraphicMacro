@@ -20,7 +20,7 @@ namespace ClosersGraphicMacro.src
         {
             get
             {
-                return $"{targetProgramPath}/SweetFX_settings.txt";
+                return $"{targetProgramPath}/SweetFX/SweetFX_settings.txt";
             }
 
         }
